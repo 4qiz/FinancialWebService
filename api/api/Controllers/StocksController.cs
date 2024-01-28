@@ -43,15 +43,25 @@ namespace api.Controllers
         }
 
         // PUT: api/Stocks/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutStock(int id, Stock stock)
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> Update(
+            [FromRoute] int id,
+            [FromBody] UpdateStockRequestDto updateDto)
         {
-            if (id != stock.Id)
+            var stockModel = _context.Stocks.FirstOrDefault(x => x.Id == id);
+
+            if (stockModel == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(stock).State = EntityState.Modified;
+            stockModel.Symbol = updateDto.Symbol;
+            stockModel.CompanyName = updateDto.CompanyName;
+            stockModel.Purchase = updateDto.Purchase;
+            stockModel.LastDiv = updateDto.LastDiv;
+            stockModel.Industry = updateDto.Industry;
+            stockModel.MarketCap = updateDto.MarketCap;
 
             try
             {
@@ -69,7 +79,7 @@ namespace api.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(stockModel.ToStockDto());
         }
 
         // POST: api/Stocks
