@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using api.Data;
+using api.Dtos.Stock;
+using api.Mappers;
+using api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using api.Data;
-using api.Models;
 
 namespace api.Controllers
 {
@@ -23,9 +20,12 @@ namespace api.Controllers
 
         // GET: api/Stocks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Stock>>> GetAll()
+        public IActionResult GetAll()
         {
-            return Ok(await _context.Stocks.ToListAsync());
+            var stocks = _context.Stocks
+                .ToList()
+                .Select(s => s.ToStockDto());
+            return Ok(stocks);
         }
 
         // GET: api/Stocks/5
@@ -39,11 +39,10 @@ namespace api.Controllers
                 return NotFound();
             }
 
-            return Ok(stock);
+            return Ok(stock.ToStockDto());
         }
 
         // PUT: api/Stocks/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStock(int id, Stock stock)
         {
@@ -74,14 +73,17 @@ namespace api.Controllers
         }
 
         // POST: api/Stocks
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Stock>> PostStock(Stock stock)
+        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
         {
-            _context.Stocks.Add(stock);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetStock", new { id = stock.Id }, stock);
+            var stockModel = stockDto.ToStockFromCreateDto();
+            _context.Stocks.Add(stockModel);
+            _context.SaveChanges();
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = stockModel.Id },
+                stockModel.ToStockDto()
+                );
         }
 
         // DELETE: api/Stocks/5
