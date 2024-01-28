@@ -97,18 +97,17 @@ namespace api.Controllers
         }
 
         // DELETE: api/Stocks/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteStock(int id)
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var stock = await _context.Stocks.FindAsync(id);
-            if (stock == null)
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+            if (stockModel == null)
             {
                 return NotFound();
             }
-
-            _context.Stocks.Remove(stock);
+            _context.Stocks.Remove(stockModel);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
