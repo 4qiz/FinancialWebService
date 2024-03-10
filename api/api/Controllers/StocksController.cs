@@ -20,12 +20,11 @@ namespace api.Controllers
 
         // GET: api/Stocks
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var stocks = _context.Stocks
-                .ToList()
-                .Select(s => s.ToStockDto());
-            return Ok(stocks);
+            var stocks = await _context.Stocks
+                .ToListAsync();
+            return Ok(stocks.Select(s => s.ToStockDto()));
         }
 
         // GET: api/Stocks/5
@@ -49,7 +48,7 @@ namespace api.Controllers
             [FromRoute] int id,
             [FromBody] UpdateStockRequestDto updateDto)
         {
-            var stockModel = _context.Stocks.FirstOrDefault(x => x.Id == id);
+            var stockModel = await _context.Stocks.FirstOrDefaultAsync(x => x.Id == id);
 
             if (stockModel == null)
             {
@@ -84,11 +83,11 @@ namespace api.Controllers
 
         // POST: api/Stocks
         [HttpPost]
-        public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+        public async Task<IActionResult> Create([FromBody] CreateStockRequestDto stockDto)
         {
             var stockModel = stockDto.ToStockFromCreateDto();
-            _context.Stocks.Add(stockModel);
-            _context.SaveChanges();
+            await _context.Stocks.AddAsync(stockModel);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(
                 nameof(GetById),
                 new { id = stockModel.Id },
