@@ -1,5 +1,6 @@
 
 using api.Data;
+using api.Interfaces;
 using api.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,10 @@ namespace api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
@@ -26,6 +31,7 @@ namespace api
             });
 
             builder.Services.AddScoped<IStockRepository, StockRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
             var app = builder.Build();
 
