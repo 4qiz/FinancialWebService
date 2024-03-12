@@ -37,6 +37,8 @@ namespace api.Repository
                         stocks.OrderBy(s => s.Symbol);
                 }
             }
+            var skipNumber = (query.PageNumber - 1) * query.PageSize;
+            stocks = stocks.Skip(skipNumber).Take(query.PageSize);
             return await stocks.ToListAsync();
         }
 
