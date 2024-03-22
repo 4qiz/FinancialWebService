@@ -51,13 +51,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ca9971dc-428b-4a2f-a80f-4dde42ed2909",
+                            Id = "652e1ad2-2227-47ff-a18e-13e4ae55f7b2",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "c648b176-1277-4d5b-bc0c-4493d326c4b7",
+                            Id = "c51e8e0f-7788-4feb-a241-efb879fe57eb",
                             Name = "User",
                             NormalizedName = "USER"
                         });
