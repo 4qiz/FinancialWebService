@@ -31,5 +31,18 @@ namespace api.Mappers
                 Dividend= stockDto.Dividend,
                 
             };
+
+        public static Stock ToStockFromFMP(this FMPStock stockDto)
+            => new Stock
+            {
+                Symbol = stockDto.Symbol,
+                CompanyName = stockDto.CompanyName,
+                Purchase = (decimal) stockDto.Price,
+                LastDiv = (decimal)stockDto.LastDiv,
+                Industry = stockDto.Industry,
+                MarketCap = stockDto.MktCap,
+                Dividend = 99,
+
+            };
     }
 }

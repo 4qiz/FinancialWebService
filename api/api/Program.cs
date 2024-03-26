@@ -103,6 +103,8 @@ namespace api
             builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
             builder.Services.AddScoped<ITokenService, TokenService>();
+            builder.Services.AddScoped<IFMPService, FMPService>();
+            builder.Services.AddHttpClient<IFMPService, FMPService>();
 
             var app = builder.Build();
 
@@ -112,6 +114,14 @@ namespace api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(options => options
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            //.WithOrigins("https://localhost:4444")
+            .SetIsOriginAllowed(o=>true)
+            );
 
             app.UseAuthentication();
             app.UseAuthorization();
