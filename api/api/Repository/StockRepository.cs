@@ -4,7 +4,6 @@ using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace api.Repository
 {
@@ -19,7 +18,7 @@ namespace api.Repository
 
         public async Task<List<Stock>> GetAllAsync(StockQueryObject query)
         {
-            var stocks = _context.Stocks.Include(s => s.Comments).AsQueryable();
+            var stocks = _context.Stocks.Include(s => s.Comments).ThenInclude(c => c.AppUser).AsQueryable();
             if (!string.IsNullOrWhiteSpace(query.CompanyName))
             {
                 stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));

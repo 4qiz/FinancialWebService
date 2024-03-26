@@ -34,7 +34,7 @@ namespace api.Controllers
             }
 
             var stocks = await _repository.GetAllAsync(query);
-            return Ok(stocks.Select(s => s.ToStockDto()));
+            return Ok(stocks.Select(s => s.ToStockDto()).ToList());
         }
 
         // GET: api/Stocks/5
