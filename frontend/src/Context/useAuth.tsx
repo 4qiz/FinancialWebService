@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { UserProfile } from "../Models/User";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { loginAPI, registerAPI } from "../Services/AuthService";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }: Props) => {
             email: res?.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token);
+          setToken(res?.data.token!);
           setUser(userObj!);
           toast.success("Register Success!");
           navigate("/search");
@@ -68,8 +68,8 @@ export const UserProvider = ({ children }: Props) => {
             email: res?.data.email,
           };
           localStorage.setItem("user", JSON.stringify(userObj));
-          setToken(res?.data.token);
-          setUser(userObj);
+          setToken(res?.data.token!);
+          setUser(userObj!);
           toast.success("Welcome");
           navigate("/search");
         }
