@@ -62,9 +62,17 @@ namespace api
 
             //DbContext
             //connection string from appsettings.json
+
+            //sql server
+            //builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionSqlServer"));
+            //});
+
+            //postgreesql
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionPostgree"));
             });
 
             //Authentication
