@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="github_res/main_page.png" alt="main" width="1260" height="895">
+    <img src="github_res/main_page.png" alt="main">
   </a>
 
   <h3 align="center">Financial Service</h3>
