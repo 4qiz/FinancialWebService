@@ -3,7 +3,8 @@ import React from "react";
 import { PortfolioGet, PortfolioPost } from "../Models/Portfolio";
 import { handleError } from "./ErrorHandler";
 
-const api = "http://localhost:5062/api/portfolio/";
+const api = "http://localhost:5000/api/portfolio";
+//const api = "portfolio/";
 
 export const portfolioAddAPI = async (symbol: string) => {
   try {

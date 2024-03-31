@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  backend:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    depends_on:
+      - postgres_db
+
+  client:
+    image: client
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+  postgres_db:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1
+      - POSTGRES_DB=finshark
+    ports:
+      - "5433:5432"
+    restart: always
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+volumes:
+  postgres-data:

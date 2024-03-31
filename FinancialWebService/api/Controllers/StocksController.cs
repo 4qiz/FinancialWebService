@@ -25,7 +25,7 @@ namespace api.Controllers
 
         // GET: api/Stocks
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> GetAll([FromQuery] StockQueryObject query)
         {
             if (!ModelState.IsValid)

@@ -4,7 +4,6 @@ import { CommentGet } from "../../../Models/Comment";
 type Props = { comment: CommentGet };
 
 const StockCommentItem = ({ comment }: Props) => {
-  console.log("comment");
   return (
     <div className="relative grid grid-cols-1 gap-4 ml-4 p-4 mb-8 w-full border rounded-lg bg-white shadow-lg">
       <div className="relative flex gap-4">
