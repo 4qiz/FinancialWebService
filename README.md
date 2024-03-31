@@ -1,16 +1,16 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="github_res/main_page.png" alt="main">
-  </a>
 
-  <h3 align="center">Financial Service</h3>
+  <h2 align="center">Financial Service</h2>
 
   <p align="center">
     Search finance information easly!
     <br />
   </p>
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="github_res/main_page.png" alt="main">
+  </a>
 </div>
 
 <!-- ABOUT THE PROJECT -->
