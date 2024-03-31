@@ -1,5 +1,6 @@
 
 using api.Data;
+using api.Extensions;
 using api.Interfaces;
 using api.Models;
 using api.Repository;
@@ -70,10 +71,13 @@ namespace api
             //});
 
             //postgreesql
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionPostgree"));
             });
+
 
             //Authentication
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -117,17 +121,18 @@ namespace api
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            //if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.ApplyMigrations();
             }
 
             app.UseCors(options => options
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            //.WithOrigins("https://localhost:4444")
+            .WithOrigins("https://localhost:3000")
             .SetIsOriginAllowed(o=>true)
             );
 
