@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="1260" height="895">
+    <img src="github_res/main_page.png" alt="main" width="1260" height="895">
   </a>
 
   <h3 align="center">Financial Service</h3>
@@ -19,7 +19,7 @@
 
 ### Frontend
 
-- React [![React][React.js]][React-url]
+- React
 - TypeScript, HTML, CSS
 - Tailwind
 
@@ -74,13 +74,13 @@
 
 3 Search companies by ticker
 
-[![Search Page][search_page]]()
+![Main Screen](/github_res/search_page.png?raw=true ".")
 
 4 Click Add button to add company to favorites
 
 5 Click on the company name to view information about it
 
-[![Company Info Page][company_page]]()
+![Main Screen](/github_res/company_page.png?raw=true ".")
 
 ## Contact
 
