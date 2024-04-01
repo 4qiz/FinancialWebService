@@ -63,7 +63,7 @@
    ```sh
    docker-compose up
    ```
-7. - http://localhost:5000 - Frontend main page
+7. - http://localhost:5001 - Frontend main page
 
    - http://localhost:5000/swagger/index.html - API Swagger
 
