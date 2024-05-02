@@ -48,7 +48,7 @@
 1. Get a free API Key at [https://site.financialmodelingprep.com](https://site.financialmodelingprep.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/4qiz/FinancialWebService.git
    ```
 3. Enter your API key in `frontend/.env`
    ```js
