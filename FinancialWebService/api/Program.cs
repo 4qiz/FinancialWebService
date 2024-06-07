@@ -65,18 +65,18 @@ namespace api
             //connection string from appsettings.json
 
             //sql server
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionSqlServer"));
-            });
-
-            //postgreesql
-            //AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-
             //builder.Services.AddDbContext<ApplicationDbContext>(options =>
             //{
-            //    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionPostgree"));
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionSqlServer"));
             //});
+
+            //postgreesql
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnectionPostgree"));
+            });
 
 
             //Authentication
@@ -125,7 +125,7 @@ namespace api
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                //app.ApplyMigrations();
+                app.ApplyMigrations();
             }
 
             app.UseCors(options => options
